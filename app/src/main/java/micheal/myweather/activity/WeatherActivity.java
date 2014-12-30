@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 
 import micheal.myweather.R;
+import micheal.myweather.service.AutoUpdateService;
 import micheal.myweather.util.CustomLog;
 import micheal.myweather.util.HttpCallbackListener;
 import micheal.myweather.util.HttpUtil;
@@ -74,6 +75,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         mCurrentDate.setText(prefs.getString("current_date",""));
         mWeatherInfoLayout.setVisibility(View.VISIBLE);
         mCityName.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
 
     }
 
