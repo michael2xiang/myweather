@@ -61,7 +61,7 @@ public class ChooseAreaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+       //requestWindowFeature(Window.FEATURE_NO_TITLE);
         isFromWeatherActivity = getIntent().getBooleanExtra("from_weather_activity", false);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (preferences.getBoolean("city_selected", false) && isFromWeatherActivity == false) {
