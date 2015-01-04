@@ -3,16 +3,14 @@ package micheal.myweather.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import micheal.myweather.R;
 import micheal.myweather.service.AutoUpdateService;
@@ -20,6 +18,7 @@ import micheal.myweather.util.CustomLog;
 import micheal.myweather.util.HttpCallbackListener;
 import micheal.myweather.util.HttpUtil;
 import micheal.myweather.util.Utility;
+import com.google.gson.Gson;
 
 public class WeatherActivity extends Activity implements View.OnClickListener {
 
@@ -36,8 +35,9 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.weather_layout);
+
+
         mWeatherInfoLayout = (LinearLayout) findViewById(R.id.weather_info_layout);
         mCityName = (TextView) findViewById(R.id.city_name);
         mPublishText = (TextView) findViewById(R.id.publish_text);
@@ -45,7 +45,6 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         mTemp1 = (TextView) findViewById(R.id.temp1);
         mTemp2 = (TextView) findViewById(R.id.temp2);
         mCurrentDate = (TextView) findViewById(R.id.current_date);
-
         Button mSwitchCity = (Button) findViewById(R.id.swich_city);
         Button mRefush = (Button) findViewById(R.id.refush_weather);
         mSwitchCity.setOnClickListener(this);
@@ -129,29 +128,6 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
     private void queryWeatherInfo(String weatherCode) {
         String requsetUrl = "http://www.weather.com.cn/data/cityinfo/" + weatherCode + ".html";
         queryFromServer(requsetUrl,"weatherCode");
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_weather, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
